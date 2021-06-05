@@ -1,0 +1,12 @@
+<div class="input-group mb-3">
+  <input
+    [(ngModel)]="todo.text"
+    type="text"
+    class="form-control"
+    placeholder="To-do"
+  />
+  <button class="btn btn-outline-secondary" type="button" (click)="addTodo()">
+    Add
+  </button>
+</div>
+<p class="text-danger py-2" *ngIf="error">{{ error }}</p>

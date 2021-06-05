@@ -1,0 +1,10 @@
+<div *ngIf="!todo">
+  <p>Todo not found</p>
+</div>
+
+<div *ngIf="todo">
+  <h3><span class="fw-bold">Todo: </span>{{ todo.text }}</h3>
+  <p>Created: {{ todo.createdAt.toDate() | date }}</p>
+</div>
+
+<a routerLink="/">Go back</a>

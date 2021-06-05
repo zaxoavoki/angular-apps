@@ -1,0 +1,30 @@
+<app-add-todo></app-add-todo>
+
+<div class="row">
+  <div class="col-12 mb-3">
+    <h3 class="fw-bold">To-do:</h3>
+  </div>
+  <div class="col-12" *ngIf="todos.length === 0">
+    <p>There is no any task yet</p>
+  </div>
+  <div
+    class="col-12 card mb-3"
+    *ngFor="let todo of todos"
+    (click)="toggleComplete(todo.id)"
+  >
+    <div
+      class="card-body d-flex align-items-center {{ todo.id }}"
+      [class.text-decoration-line-through]="todo.isComplete"
+    >
+      <p class="flex-grow-1 mb-0">
+        <a routerLink="/todo/{{ todo.id }}">{{ todo.text }}</a>
+      </p>
+      <span class="float-end small">{{ todo.createdAt.toDate() | date }}</span>
+      <span
+        class="float-end btn btn-outline-danger ms-2"
+        (click)="removeTodo(todo.id)"
+        >&times;</span
+      >
+    </div>
+  </div>
+</div>

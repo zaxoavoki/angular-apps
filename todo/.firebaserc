@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular-todo-ad1d4": {
+      "hosting": {
+        "todo": [
+          "angular-todo-ad1d4"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular-todo-ad1d4"
+  }
+}
