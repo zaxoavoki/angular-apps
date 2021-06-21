@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Todo, TodoService } from '../todo.service';
+import { Todo } from '../../../types/Todo';
+import { TodosService } from '../todos.service';
 
 @Component({
   selector: 'app-add-todo',
@@ -12,7 +13,7 @@ export class AddTodoComponent {
     text: '',
   };
 
-  constructor(private todoService: TodoService) {}
+  constructor(private todoService: TodosService) {}
 
   addTodo() {
     if (this.todo.text?.trim() === '') {

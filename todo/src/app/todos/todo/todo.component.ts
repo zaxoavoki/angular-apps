@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Todo, TodoService } from '../todo.service';
+import { Todo } from '../../../types/Todo';
+import { TodosService } from '../todos.service';
 
 @Component({
   selector: 'app-todo',
@@ -8,16 +9,16 @@ import { Todo, TodoService } from '../todo.service';
   styleUrls: [],
 })
 export class TodoComponent implements OnInit {
-  todo: Todo | undefined;
+  todo?: Todo;
 
   constructor(
     private route: ActivatedRoute,
-    private todoService: TodoService
+    private todoService: TodosService
   ) {}
 
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get('id');
-    this.todoService.todos.subscribe(
+    this.todoService.todos$.subscribe(
       (todos) => (this.todo = todos.find((todo: Todo) => todo.id === id))
     );
   }

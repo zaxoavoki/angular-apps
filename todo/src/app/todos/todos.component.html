@@ -1,9 +1,38 @@
-<app-add-todo></app-add-todo>
+<div class="row">
+  <div class="col-12 d-flex align-items-center mb-3">
+    <button class="btn btn-primary me-3">Log in with Google</button>
+    <app-add-todo class="flex-grow-1"></app-add-todo>
+  </div>
+</div>
 
 <div class="row">
   <div class="col-12 mb-3">
     <h3 class="fw-bold">To-do:</h3>
+
+    <div class="mb-3">    
+      <span class="me-2">Sort by:</span>
+      <button
+        (click)="sortTodosBy('desc')"
+        class="btn btn-outline-primary me-2"
+      >
+        <i class="bi bi-sort-alpha-down"></i>
+      </button>
+      <button (click)="sortTodosBy('asc')" class="btn btn-outline-primary">
+        <i class="bi bi-sort-alpha-up"></i>
+      </button>
+    </div>
+
+    <div>
+      <input
+        #filter
+        (change)="sortTodosBy('')"
+        type="text"
+        class="form-control w-100"
+        placeholder="Start typing..."
+      />
+    </div>
   </div>
+
   <div class="col-12" *ngIf="todos.length === 0">
     <p>There is no any task yet</p>
   </div>
@@ -17,7 +46,7 @@
       [class.text-decoration-line-through]="todo.isComplete"
     >
       <p class="flex-grow-1 mb-0">
-        <a routerLink="/todo/{{ todo.id }}">{{ todo.text }}</a>
+        <a [routerLink]="['/todo', todo.id]">{{ todo.text }}</a>
       </p>
       <span class="float-end small">{{ todo.createdAt.toDate() | date }}</span>
       <span
