@@ -18,7 +18,17 @@ export class AppComponent {
     if (this.field[idx] === null) {
       this.field[idx] = this.turn;
       this.turn = +!this.turn;
-      const winner = this.checkWinner(this.field);
+
+      let winner = this.checkWinner(this.field);
+      if (winner !== null) {
+        this.winner = winner;
+      }
+
+      const [, i] = this.minimax(this.field, this.turn, 10, true);
+      this.field[i] = this.turn;
+      this.turn = +!this.turn;
+
+      winner = this.checkWinner(this.field);
       if (winner !== null) {
         this.winner = winner;
       }
@@ -49,5 +59,53 @@ export class AppComponent {
     this.field = Array(9).fill(null);
     this.turn = 0;
     this.winner = null;
+  }
+
+  calculateState(field: number[], turn: number, idx: number): number[] {
+    if (field[idx] === null) {
+      field[idx] = turn;
+    }
+    return field;
+  }
+
+  minimax(
+    field: number[],
+    turn: number,
+    depth: number,
+    expectMax: boolean
+  ): any {
+    const possibleMoves = field
+      .map((e: number, i: number) => [e, i])
+      .filter((e: number[]) => e[0] === null);
+
+    if (depth === 0 || possibleMoves.length === 0) {
+      const winner = this.checkWinner(field);
+      return [winner === this.turn ? 1 : winner === null ? 0 : -1, null];
+    }
+
+    let max = [-1, null];
+    let min = [2, null];
+
+    const possibleStates = possibleMoves.map((e: number[]) => [
+      e[1],
+      this.calculateState([...field], turn, e[1]),
+    ]);
+
+    for (const [i, state] of possibleStates) {
+      const [value,] = this.minimax(
+        state as number[],
+        turn ^ 1,
+        depth - 1,
+        !expectMax
+      );
+      if (expectMax && value > (max[0] as number)) {
+        max = [value, i];
+      }
+      if (!expectMax && value < (min[0] as number)) {
+        min = [value, i];
+      }
+    }
+
+    return expectMax ? max : min;
   }
 }

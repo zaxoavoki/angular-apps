@@ -1,7 +1,4 @@
-<p class="title" [ngSwitch]="winner === null">
-  <span *ngSwitchCase="true">Current player: {{ turn | player }}</span>
-  <span *ngSwitchCase="false">Winner: {{ winner | player }}</span>
-</p>
+<p class="title" *ngIf="winner !== null">Winner: {{ winner | player }}</p>
 
 <div class="field">
   <app-cell
