@@ -1,0 +1,53 @@
+.field {
+  display: grid;
+  grid-template-columns: repeat(3, 25vh);
+  grid-template-rows: repeat(3, 25vh);
+  gap: 10px;
+  justify-content: center;
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.restart {
+  display: block;
+  border-radius: 50%;
+  border: 0;
+  margin: 0 auto;
+  margin-top: 1rem;
+  padding: 0.4rem;
+  cursor: pointer;
+  background: #ddd;
+}
+
+.restart:hover {
+  background: #ccc;
+}
+
+.field__cell {
+  background: rgb(236, 236, 236);
+  border: solid 1px #aaa;
+  border-radius: 0.2rem;
+  height: 100%;
+  font-size: 10rem;
+  text-align: center;
+  line-height: 25vh;
+  user-select: none;
+  cursor: pointer;
+}
+
+.field__cell:hover {
+  background: rgb(201, 201, 201);
+}
+
+.field__cell--x {
+  background: rgb(59, 223, 108) !important;
+  cursor: not-allowed;
+}
+
+.field__cell--o {
+  background: rgb(77, 120, 240) !important;
+  cursor: not-allowed;
+}

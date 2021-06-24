@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap");
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: "Lato", sans-serif;
+  padding: 0;
+}
+
+app-root {
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  height: 100%;
+}
