@@ -1,0 +1,91 @@
+<div class="container py-5 mt-5">
+  <div class="row">
+    <div class="col-12 col-md-6 offset-md-3">
+      <h4 class="fw-bold mb-3">Add new course</h4>
+      <form [formGroup]="courseForm" (submit)="onSubmit()">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input
+            [ngClass]="{
+              'is-valid':
+                courseForm.get('title')?.valid &&
+                courseForm.get('title')?.touched,
+              'is-invalid':
+                !courseForm.get('title')?.valid &&
+                courseForm.get('title')?.touched
+            }"
+            formControlName="title"
+            type="text"
+            class="form-control"
+            id="title"
+            placeholder="Math course..."
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="text" class="form-label">Description</label>
+          <textarea
+            [ngClass]="{
+              'is-valid':
+                courseForm.get('text')?.valid &&
+                courseForm.get('text')?.touched,
+              'is-invalid':
+                !courseForm.get('text')?.valid &&
+                courseForm.get('text')?.touched
+            }"
+            formControlName="text"
+            class="form-control"
+            id="text"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col">
+            <label for="startsAt" class="form-label">Starts at</label>
+            <input
+              [ngClass]="{
+                'is-valid':
+                  courseForm.get('startsAt')?.valid &&
+                  courseForm.get('startsAt')?.touched,
+                'is-invalid':
+                  !courseForm.get('startsAt')?.valid &&
+                  courseForm.get('startsAt')?.touched
+              }"
+              formControlName="startsAt"
+              type="date"
+              class="form-control"
+              id="startsAt"
+            />
+          </div>
+
+          <div class="col">
+            <label for="endsAt" class="form-label">Ends at</label>
+            <input
+              [ngClass]="{
+                'is-valid':
+                  courseForm.get('endsAt')?.valid &&
+                  courseForm.get('endsAt')?.touched,
+                'is-invalid':
+                  !courseForm.get('endsAt')?.valid &&
+                  courseForm.get('endsAt')?.touched
+              }"
+              formControlName="endsAt"
+              type="date"
+              class="form-control"
+              id="endsAt"
+            />
+          </div>
+        </div>
+
+        <button
+          [disabled]="courseForm.untouched || !courseForm.valid"
+          type="submit"
+          class="btn btn-outline-success float-end"
+        >
+          Publish course
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

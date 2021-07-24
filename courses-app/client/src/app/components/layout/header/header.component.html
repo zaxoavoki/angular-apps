@@ -1,0 +1,83 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" routerLink="/">Courses</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#header--nav"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="header--nav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" *canView="['user']">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/courses">Courses</a>
+        </li>
+        <li class="nav-item" *canView="['user']">
+          <a class="nav-link" [routerLink]="['/profile', (user$ | async)?._id]"
+            >My profile</a
+          >
+        </li>
+      </ul>
+
+      <form class="d-flex flex-grow-1 px-lg-5 mb-3 mb-lg-0">
+        <input
+          class="form-control me-2"
+          type="search"
+          name="search"
+          placeholder="Search"
+          [(ngModel)]="search"
+        />
+        <button
+          class="btn btn-outline-success"
+          type="button"
+          (click)="showModal('search-modal')"
+        >
+          Search
+        </button>
+      </form>
+
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" *canView="['guest']">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Log in</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-primary" routerLink="/signup">Sign up</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" *canView="['user']">
+        <div class="dropdown" *canView="['admin']">
+          <button
+            class="btn btn-danger dropdown-toggle me-2"
+            type="button"
+            id="admin-dropdown"
+            data-bs-toggle="dropdown"
+          >
+            Admin
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" [routerLink]="['/admin', 'users']"
+                >Users</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/admin', 'courses']"
+                >Add course</a
+              >
+            </li>
+          </ul>
+        </div>
+        <li class="nav-item">
+          <a class="nav-link" (click)="logout()">Log out</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,66 @@
+<ng-container *ngIf="course$ | async as course">
+  <div class="container mt-5 pb-5" *ngIf="course">
+    <div class="card">
+      <div class="card-header d-flex">
+        <h5 class="fw-bold mb-0">{{ course.title }}</h5>
+        <span class="ms-auto small"
+          >Created: {{ course.createdAt | fromNowMoment }}</span
+        >
+      </div>
+      <div class="card-body pre">
+        <div class="row">
+          <div class="col-md-6 col-12 col-lg-7 mb-3">
+            <p class="fw-bold">
+              Duration:
+              <span class="badge bg-success"
+                >{{ course.endsAt | fromDateMoment: course.startsAt }}
+              </span>
+            </p>
+
+            <p *ngIf="course.text.trim().length === 0">
+              No description provided.
+            </p>
+            <p>{{ course.text }}</p>
+
+            <ng-container *ngIf="!(isParticipating$ | async); else leftButton">
+              <button
+                *canView="['user']"
+                (click)="joinCourse()"
+                class="btn btn-outline-success ms-2 float-end"
+              >
+                Join course
+              </button>
+            </ng-container>
+            <ng-template #leftButton>
+              <button
+                *canView="['user']"
+                (click)="leaveCourse()"
+                class="btn btn-outline-danger ms-2 float-end"
+              >
+                Leave course
+              </button>
+            </ng-template>
+
+            <button
+              (click)="location.back()"
+              class="btn btn-outline-primary float-end"
+            >
+              Back
+            </button>
+          </div>
+          <div class="col-md-6 col-12 col-lg-5">
+            <p class="text-muted" *ngIf="course.participants.length === 0">
+              There is no any participant yet
+            </p>
+
+            <app-user-card
+              [user]="participant"
+              (onDeleteUser)="deleteUser(participant._id)"
+              *ngFor="let participant of course.participants"
+            ></app-user-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

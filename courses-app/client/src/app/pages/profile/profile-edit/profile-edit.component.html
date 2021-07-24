@@ -1,0 +1,101 @@
+<div class="container mt-5">
+  <div class="row mt-5">
+    <div class="col-12 offset-md-3 col-md-6">
+      <h4 class="mb-3">Edit profile information</h4>
+
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-12 col-sm-6 mb-3">
+            <label for="firstName" class="form-label">First name</label>
+            <input
+              autocomplete="given-name"
+              [ngClass]="{
+                'is-valid':
+                  editForm.get('firstName')?.valid &&
+                  editForm.get('firstName')?.touched,
+                'is-invalid':
+                  !editForm.get('firstName')?.valid &&
+                  editForm.get('firstName')?.touched
+              }"
+              type="text"
+              class="form-control"
+              id="firstName"
+              formControlName="firstName"
+            />
+            <div class="invalid-feedback">Use letters for first name</div>
+          </div>
+
+          <div class="col-12 col-sm-6 mb-3">
+            <label for="lastName" class="form-label">Last name</label>
+            <input
+              autocomplete="family-name"
+              [ngClass]="{
+                'is-valid':
+                  editForm.get('lastName')?.valid &&
+                  editForm.get('lastName')?.touched,
+                'is-invalid':
+                  !editForm.get('lastName')?.valid &&
+                  editForm.get('lastName')?.touched
+              }"
+              type="text"
+              class="form-control"
+              id="lastName"
+              formControlName="lastName"
+            />
+            <div class="invalid-feedback">Use letters for last name</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input
+            autocomplete="email"
+            [ngClass]="{
+              'is-valid':
+                editForm.get('email')?.valid && editForm.get('email')?.touched,
+              'is-invalid':
+                !editForm.get('email')?.valid && editForm.get('email')?.touched
+            }"
+            type="email"
+            class="form-control"
+            id="email"
+            formControlName="email"
+          />
+          <div class="invalid-feedback">Email is required</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            autocomplete="current-password"
+            [ngClass]="{
+              'is-valid':
+                editForm.get('password')?.valid &&
+                editForm.get('password')?.touched,
+              'is-invalid':
+                !editForm.get('password')?.valid &&
+                editForm.get('password')?.touched
+            }"
+            type="password"
+            class="form-control"
+            id="password"
+            formControlName="password"
+          />
+          <div class="invalid-feedback">
+            Password must be in range of 6 to 32 chars
+          </div>
+        </div>
+
+        <div class="text-end">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="editForm.untouched || !editForm.valid"
+          >
+            Update
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

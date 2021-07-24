@@ -1,0 +1,56 @@
+<div class="container pt-5" *ngIf="user$ | async; else notLogged">
+  <div class="row">
+    <div class="col-12 col-md-8">
+      <h3
+        class="fw-bold"
+        *ngIf="(participatedCourses$ | async)?.length === 0; else courses"
+      >
+        You are not participating any course
+      </h3>
+      <ng-template #courses>
+        <h3 class="mb-4">You participate in:</h3>
+        <app-small-course-card
+          *ngFor="let course of participatedCourses$ | async"
+          (deleteCourse)="deleteCourse(course._id)"
+          [course]="course"
+        ></app-small-course-card>
+      </ng-template>
+    </div>
+
+    <ng-container *ngIf="managableCourses$ | async as courses">
+      <ng-container *ngIf="courses.length !== 0">
+        <div *canView="['admin']" class="col-12 col-md-4">
+          <h3 class="mb-4">You own:</h3>
+          <app-small-course-card
+            *ngFor="let course of courses"
+            (deleteCourse)="deleteCourse(course._id)"
+            [course]="course"
+          ></app-small-course-card>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #notLogged>
+  <div class="row">
+    <div
+      class="
+        vh-100
+        bg-dark
+        text-center
+        d-flex
+        justify-content-center
+        flex-column
+      "
+    >
+      <h1 class="display-3 fw-bold text-light">Check out our new courses</h1>
+      <p class="text-light mb-5">More info you can find on other pages</p>
+      <a
+        routerLink="/courses"
+        class="mx-auto d-inline-block btn btn-lg btn-outline-success"
+        >Discover</a
+      >
+    </div>
+  </div>
+</ng-template>

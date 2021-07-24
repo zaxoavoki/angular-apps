@@ -1,0 +1,59 @@
+<div class="container mt-4">
+  <ng-container *ngIf="user$ | async as user">
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 col-md-4">
+            <img
+              src="{{
+                user.picture ||
+                  'https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar-600x600.png'
+              }}"
+              alt="image"
+              class="w-100 rounded-circle mb-3"
+            />
+          </div>
+          <div
+            class="
+              col-12 col-md-8
+              d-flex
+              flex-column
+              justify-content-center
+              align-items-center
+            "
+          >
+            <h1 class="fw-bold align-middle">
+              {{ user.firstName }} {{ user.lastName }}
+              <button
+                *ngIf="(authUser$ | async)?._id === user._id"
+                [routerLink]="['/profile', user._id, 'edit']"
+                class="btn small btn-success"
+              >
+                Edit
+              </button>
+            </h1>
+            <p>
+              <span
+                *ngFor="let role of user.roles"
+                class="me-1 badge rounded-pill bg-primary"
+                >{{ role }}</span
+              >
+              {{ user.email }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card w-100" *ngIf="(courses$ | async)?.length !== 0">
+      <div class="card-body pb-2">
+        <p>Participates in:</p>
+        <div class="row">
+          <div class="col-12" *ngFor="let course of courses$ | async">
+            <app-small-course-card (deleteCourse)="deleteCourse(course._id)" [course]="course"></app-small-course-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

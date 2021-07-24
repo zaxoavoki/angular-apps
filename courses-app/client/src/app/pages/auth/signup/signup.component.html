@@ -1,0 +1,92 @@
+<div class="col col-md-6 offset-md-3 py-5 mt-5">
+  <h3 class="mb-4 mt-5">Create new account</h3>
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-12 col-sm-6 mb-3">
+        <label for="firstName" class="form-label">First name</label>
+        <input
+          [ngClass]="{
+            'is-valid':
+              signupForm.get('firstName')?.valid &&
+              signupForm.get('firstName')?.touched,
+            'is-invalid':
+              !signupForm.get('firstName')?.valid &&
+              signupForm.get('firstName')?.touched
+          }"
+          type="text"
+          class="form-control"
+          id="firstName"
+          formControlName="firstName"
+        />
+        <div class="invalid-feedback">Use letters for first name</div>
+      </div>
+
+      <div class="col-12 col-sm-6 mb-3">
+        <label for="lastName" class="form-label">Last name</label>
+        <input
+          [ngClass]="{
+            'is-valid':
+              signupForm.get('lastName')?.valid &&
+              signupForm.get('lastName')?.touched,
+            'is-invalid':
+              !signupForm.get('lastName')?.valid &&
+              signupForm.get('lastName')?.touched
+          }"
+          type="text"
+          class="form-control"
+          id="lastName"
+          formControlName="lastName"
+        />
+        <div class="invalid-feedback">Use letters for last name</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input
+        [ngClass]="{
+          'is-valid':
+            signupForm.get('email')?.valid && signupForm.get('email')?.touched,
+          'is-invalid':
+            !signupForm.get('email')?.valid && signupForm.get('email')?.touched
+        }"
+        type="email"
+        class="form-control"
+        id="email"
+        formControlName="email"
+      />
+      <div class="invalid-feedback">Email is required</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        [ngClass]="{
+          'is-valid':
+            signupForm.get('password')?.valid &&
+            signupForm.get('password')?.touched,
+          'is-invalid':
+            !signupForm.get('password')?.valid &&
+            signupForm.get('password')?.touched
+        }"
+        type="password"
+        class="form-control"
+        id="password"
+        formControlName="password"
+      />
+      <div class="invalid-feedback">
+        Password must be in range of 6 to 32 chars
+      </div>
+    </div>
+
+    <div class="text-end">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="signupForm.untouched || !signupForm.valid"
+      >
+        Create account
+      </button>
+    </div>
+  </form>
+</div>

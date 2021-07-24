@@ -1,0 +1,27 @@
+<app-modal uid="search-modal">
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Type to search..."
+      name="search"
+      [(ngModel)]="search"
+    />
+    <button class="btn btn-outline-success" type="button" (click)="searchCourses()">
+      Search
+    </button>
+  </div>
+
+  <ng-container title>Search</ng-container>
+  <p *ngIf="(courses$ | async)?.length !== 0"></p>
+  <ng-container *ngIf="courses$ | async as courses">
+    <div class="row">
+      <div class="col-12 mb-3" *ngFor="let course of courses">
+        <app-big-course-card
+          (deleteCourse)="deleteCouse(course._id)"
+          [course]="course"
+        ></app-big-course-card>
+      </div>
+    </div>
+  </ng-container>
+</app-modal>

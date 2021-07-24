@@ -1,0 +1,74 @@
+<div class="row mt-4">
+  <div class="col-12 col-md-3 col-sm-4">
+    <div class="card mb-3">
+      <div class="card-body">
+        <form>
+          <div class="mb-3">
+            <label for="duration" class="form-label"
+              >Max duration: {{ filters.duration || 0 }} mins</label
+            >
+            <input
+              [(ngModel)]="filters.duration"
+              type="range"
+              class="form-range"
+              id="duration"
+              min="0"
+              max="1000"
+              name="duration"
+              value="0"
+              (change)="filterByDuration()"
+            />
+          </div>
+
+          <div>
+            <p class="mb-1">Sort by duration</p>
+            <div
+              class="btn-group w-100"
+              role="group"
+              aria-label="Basic example"
+            >
+              <button
+                (click)="sortByDuration('asc')"
+                class="btn btn-outline-primary"
+              >
+                Asc
+              </button>
+              <button
+                (click)="sortByDuration('desc')"
+                class="btn btn-outline-primary"
+              >
+                Desc
+              </button>
+              <button
+                (click)="sortByDuration('reset')"
+                class="btn btn-outline-primary"
+              >
+                Reset
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <app-ad-banner [ads]="ads"></app-ad-banner>
+  </div>
+
+  <div class="col-12 col-md-9 col-sm-8">
+    <div class="row">
+      <h3 class="fw-bold" *ngIf="(courses$ | async)?.length === 0">
+        Nothing was found
+      </h3>
+
+      <div
+        *ngFor="let course of courses$ | async"
+        class="col-md-3 col-lg-4 col-sm-6 col-12 mb-3"
+      >
+        <app-big-course-card
+          (deleteCourse)="deleteCourse(course._id)"
+          [course]="course"
+        ></app-big-course-card>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="col col-md-6 offset-md-3 py-5 mt-5">
+  <h3 class="mb-4 mt-5">Log into your account</h3>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input
+        autocomplete="email"
+        [ngClass]="{
+          'is-valid':
+            loginForm.get('email')?.valid && loginForm.get('email')?.touched,
+          'is-invalid':
+            !loginForm.get('email')?.valid && loginForm.get('email')?.touched
+        }"
+        type="email"
+        class="form-control"
+        id="email"
+        formControlName="email"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        autocomplete="current-password"
+        [ngClass]="{
+          'is-valid':
+            loginForm.get('password')?.valid &&
+            loginForm.get('password')?.touched,
+          'is-invalid':
+            !loginForm.get('password')?.valid &&
+            loginForm.get('password')?.touched
+        }"
+        type="password"
+        class="form-control"
+        id="password"
+        formControlName="password"
+      />
+    </div>
+
+    <div class="mb-3 form-check">
+      <input
+        type="checkbox"
+        class="form-check-input"
+        id="logout"
+        formControlName="logout"
+      />
+      <label class="form-check-label" for="logout">Don't log out</label>
+    </div>
+
+    <div class="text-end">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="loginForm.untouched || !loginForm.valid"
+      >
+        Sign in
+      </button>
+    </div>
+  </form>
+</div>

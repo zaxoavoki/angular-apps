@@ -1,0 +1,24 @@
+{
+  "devDependencies": {
+    "@types/mongoose": "^5.11.97",
+    "faker": "^5.5.3",
+    "nodemon": "^2.0.12"
+  },
+  "dependencies": {
+    "@typegoose/typegoose": "^7.6.3",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/faker": "^5.5.7",
+    "@types/jsonwebtoken": "^8.5.4",
+    "@types/node": "^16.3.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "lowdb": "^2.1.0",
+    "mongoose": "^5.13.2"
+  },
+  "scripts": {
+    "dev": "nodemon server.ts",
+    "seeder": "nodemon seeder.ts"
+  }
+}

@@ -1,0 +1,29 @@
+<ng-container *ngIf="course">
+  <div class="card mb-2">
+    <div class="card-body d-flex align-items-center">
+      <h6 class="card-title link-dark mb-0 d-flex align-items-center w-100">
+        <span class="badge bg-primary me-2">{{
+          course.endsAt | fromDateMoment: course.startsAt
+        }}</span>
+        <span [routerLink]="['/courses', course._id]">{{ course.title }}</span>
+        <span class="badge border text-muted rounded-pill ms-auto me-2">{{
+          course.participants.length
+        }}</span>
+      </h6>
+      <div class="ms-auto d-flex" *canView="['admin']">
+        <button
+          class="btn btn-outline-primary me-2"
+          [routerLink]="['/courses', course._id, 'edit']"
+        >
+          <i class="bi bi-pencil"></i>
+        </button>
+        <button
+          class="btn btn-outline-danger"
+          (click)="onDeleteCourse(course._id)"
+        >
+          <i class="bi bi-trash"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>

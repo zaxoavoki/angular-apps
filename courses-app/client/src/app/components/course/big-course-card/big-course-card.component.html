@@ -1,0 +1,34 @@
+<ng-container *ngIf="course">
+  <div class="card h-100">
+    <div class="card-body">
+      <h6
+        class="
+          card-title
+          fw-bold
+          link-dark
+          d-flex
+          justify-content-between
+          align-items-start
+        "
+      >
+        <span [routerLink]="['/courses', course._id]">{{ course.title }}</span>
+        <button
+          class="btn btn-outline-danger ms-2"
+          *canView="['admin']"
+          (click)="onDeleteCourse(course._id)"
+        >
+          <i class="bi bi-trash"></i>
+        </button>
+      </h6>
+      <p class="text-muted" *ngIf="course.text.trim().length === 0">
+        There is no description
+      </p>
+      {{ course.text.substr(0, 150) }}
+    </div>
+    <div class="card-footer">
+      <small class="text-muted"
+        >Duration: {{ course.endsAt | fromDateMoment: course.startsAt }}</small
+      >
+    </div>
+  </div>
+</ng-container>
